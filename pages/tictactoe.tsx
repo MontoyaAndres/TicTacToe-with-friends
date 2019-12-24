@@ -49,8 +49,24 @@ const reducer = (state: IDefaultState, action: IAction) => {
 };
 
 const Game = styled.div`
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  margin-top: 1rem;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  width: 20%;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const index = () => {
@@ -77,6 +93,14 @@ const index = () => {
     dispatch({ type: "start" });
   }, [dispatch]);
 
+  const handleExit = () => {
+    window.localStorage.removeItem("Inttegrants");
+
+    Router.push({
+      pathname: "/team"
+    });
+  };
+
   return (
     <Game>
       <Board squares={state.squares} onClick={handleClick} />
@@ -84,6 +108,7 @@ const index = () => {
         hasStarted={state.squares.some(s => s)}
         isXNext={state.isXNext}
       />
+      <Button onClick={handleExit}>Exit</Button>
       {!!state.winner && (
         <Announcement winner={state.winner} onStart={handleStart} />
       )}

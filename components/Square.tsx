@@ -23,6 +23,10 @@ const Button = styled.button`
     /* Prevent items from overlapping the outline */
     position: relative;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Square = memo(({ value, onClick, index }: SquareProps) => {
